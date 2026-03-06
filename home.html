@@ -34,18 +34,18 @@
                             <path d="m21 21-4.3-4.3"></path>
                         </g>
                     </svg>
-                    <input type="search" required placeholder="Search issues..." />
+                    <input id="search" type="search" required placeholder="Search issues..." />
                 </label>
-                <button class="btn btn-primary text-white join-item">Search</button>
+                <button onclick="loadSearchValue()" class="btn btn-primary text-white join-item">Search</button>
             </div>
         </div>
     </header>
     <main class="w-9/12 mx-auto py-14">
         <section id="allIssueBtns">
             <div class="navbar bg-base-100 shadow-sm gap-4">
-                <button id="all-btn" class="btn btn-primary text-white">All</button>
-                <button class="btn btn-outline">Open</button>
-                <button class="btn btn-outline">Closed</button>
+                <button id="all-btn" class="btn btn-primary text-white open-close-all">All</button>
+                <button onclick="displayOpenIssue()" id="open-btn" class="btn btn-outline open-close-all">Open</button>
+                <button onclick="displayClosedIssue()" id="closed-btn" class="btn btn-outline open-close-all">Closed</button>
             </div>
         </section>
         <section class="mt-4">
