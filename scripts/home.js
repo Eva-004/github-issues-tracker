@@ -11,6 +11,12 @@ const closedBtn = document.getElementById('closed-btn');
 const openClosAllBtn = document.querySelectorAll('.open-close-all');
 const searchBar = document.getElementById('search');
 
+function displayLabels(labels){
+    return labels.map(el=> `<span class="text-md text-rose-600 bg-yellow-200 p-1 rounded-lg ">${el}</span>`
+    ).join('');
+    
+}
+
  async function loadAllIssues() {
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const data = await res.json();
@@ -34,7 +40,8 @@ const searchBar = document.getElementById('search');
                     </div>
                     <h2 class="font-semibold">${item.title}</h2>
                     <p class="line-clamp-2 text-[#64748B]">${item.description}</p>
-                    <div id="allLabels" class="flex gap-3 items-center labels">
+                    <div  class="flex gap-2 flex-wrap labels">
+                     ${displayLabels(item.labels)}
                     </div>
                     <hr class="text-[#64748B80]">
                     <div class="space-y-1">
