@@ -1,6 +1,7 @@
 let allIssues = [];
 let openIssues = [];
 let closedIssues = [];
+let searchIssues = [];
 const allBtn = document.getElementById('all-btn');
 const allIssue = document.getElementById('allIssue');
 const allIssueContainer = document.getElementById('allIssueContainer');
@@ -160,6 +161,10 @@ function displayClosedIssue(){
     searchBar.innerText='';
     const res=await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`);
     const data = await res.json();
+    data.data.forEach(item=>{
+       searchIssues.push(item);
+    })
+    allIssue.innerText=searchIssues.length;
    displayAllIssues(data.data);
  }
  loadAllIssues();
