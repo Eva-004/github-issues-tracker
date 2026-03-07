@@ -12,7 +12,27 @@ const openClosAllBtn = document.querySelectorAll('.open-close-all');
 const searchBar = document.getElementById('search');
 
 function displayLabels(labels){
-    return labels.map(el=> `<span class="text-md text-rose-600 bg-yellow-200 p-1 rounded-lg ">${el}</span>`
+    return labels.map(el=>{
+        let bg ='';
+        let icon = '';
+        if(el==='bug'){
+         bg = 'bg-yellow-200';
+         icon='fa-bug'
+        }else if(el === 'help wanted'){
+           bg = 'bg-red-100';
+            icon='fa-dharmachakra'
+        }else if(el ==='enhancement'){
+             bg = 'bg-green-100';
+            icon='fa-bahai'
+        }else if(el==='good first issue'){
+             bg = 'bg-purple-100';
+            icon='fa-brands fa-gg'
+        }else{
+             bg = 'bg-blue-100';
+            icon='fa-brands fa-readme'
+        }
+        return `<span class="text-md text-rose-600 p-1 ${bg} rounded-lg "><i class="fa-solid ${icon}"></i> ${el}</span>`
+    }
     ).join('');
     
 }
@@ -82,7 +102,8 @@ function displayOpenIssue(){
                     </div>
                     <h2 class="font-semibold">${item.title}</h2>
                     <p class="line-clamp-2 text-[#64748B]">${item.description}</p>
-                    <div id="allLabels" class="flex gap-3 items-center labels">
+                    <div  class="flex gap-2 flex-wrap labels">
+                     ${displayLabels(item.labels)}
                     </div>
                     <hr class="text-[#64748B80]">
                     <div class="space-y-1">
@@ -112,7 +133,8 @@ function displayClosedIssue(){
                     </div>
                     <h2 class="font-semibold">${item.title}</h2>
                     <p class="line-clamp-2 text-[#64748B]">${item.description}</p>
-                    <div id="allLabels" class="flex gap-3 items-center labels">
+                    <div  class="flex gap-2 flex-wrap labels">
+                     ${displayLabels(item.labels)}
                     </div>
                     <hr class="text-[#64748B80]">
                     <div class="space-y-1">
@@ -141,7 +163,8 @@ function displayClosedIssue(){
                     </div>
                     <h2 class="font-semibold">${item.title}</h2>
                     <p class="line-clamp-2 text-[#64748B]">${item.description}</p>
-                    <div id="allLabels" class="flex gap-3 items-center labels">
+                    <div  class="flex gap-2 flex-wrap labels">
+                     ${displayLabels(item.labels)}
                     </div>
                     <hr class="text-[#64748B80]">
                     <div class="space-y-1">
