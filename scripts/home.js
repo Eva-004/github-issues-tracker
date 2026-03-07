@@ -10,6 +10,17 @@ const openIssue = document.getElementById('open-btn');
 const closedBtn = document.getElementById('closed-btn');
 const openClosAllBtn = document.querySelectorAll('.open-close-all');
 const searchBar = document.getElementById('search');
+const loadSpinner = document.getElementById('load-spinner');
+
+function loadingSpinner(status){
+   if(status){
+    loadSpinner.classList.remove('hidden');
+    loadSpinner.classList.add('flex');
+   }else{
+    loadSpinner.classList.remove('flex');
+    loadSpinner.classList.add('hidden');
+   }
+}
 
 function displayLabels(labels){
     return labels.map(el=>{
@@ -38,16 +49,20 @@ function displayLabels(labels){
 }
 
  async function loadAllIssues() {
+    loadingSpinner(true);
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const data = await res.json();
     displayAllIssues(data.data);
     data.data.forEach(item=>{
         allIssues.push(item);
     })
+    loadingSpinner(false);
      allIssue.innerText=allIssues.length;
+     
  }
  function displayAllIssues(data) {
       allIssueContainer.innerHTML='';
+
     data.forEach(item=>{
         loadSingleIssue(item.id);
         const div = document.createElement('div');
@@ -88,8 +103,9 @@ async function loadSingleIssue(id) {
 }
 
 function displayOpenIssue(){
-   
+   loadingSpinner(true);
    allIssueContainer.innerHTML='';
+
     allIssue.innerText=openIssues.length;
    openIssues.forEach(item=>{
         const div = document.createElement('div');
@@ -114,12 +130,13 @@ function displayOpenIssue(){
         ` 
         allIssueContainer.appendChild(div);
         activeBtn(openIssue);
+       loadingSpinner(false);
     })
 
 }
 
 function displayClosedIssue(){
-    
+    loadingSpinner(true);
    allIssueContainer.innerHTML='';
     allIssue.innerText=closedIssues.length;
    closedIssues.forEach(item=>{
@@ -145,12 +162,14 @@ function displayClosedIssue(){
         ` 
         allIssueContainer.appendChild(div);
         activeBtn(closedBtn);
+        loadingSpinner(false);
     })
 
 }
  allBtn.addEventListener('click',()=>{
-     
+     loadingSpinner(true);
   allIssueContainer.innerHTML='';
+
     allIssue.innerText=allIssues.length;
      allIssues.forEach(item=>{
         const div = document.createElement('div');
@@ -175,6 +194,7 @@ function displayClosedIssue(){
         ` 
         allIssueContainer.appendChild(div);
         activeBtn(allBtn);
+        loadingSpinner(false);
     })
  })
 
