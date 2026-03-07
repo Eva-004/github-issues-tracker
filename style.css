@@ -1,3 +1,9 @@
 *{
       font-family: "Geist", sans-serif;
 }
+.border-top-green{
+      border-top: 4px solid green;
+}
+.border-top-purple{
+      border-top: 4px solid purple;
+}

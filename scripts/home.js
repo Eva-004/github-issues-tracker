@@ -5,7 +5,6 @@ let searchIssues = [];
 const allBtn = document.getElementById('all-btn');
 const allIssue = document.getElementById('allIssue');
 const allIssueContainer = document.getElementById('allIssueContainer');
-const openClosedIcon = document.getElementById('openClosedIcon');
 const openIssue = document.getElementById('open-btn');
 const closedBtn = document.getElementById('closed-btn');
 const openClosAllBtn = document.querySelectorAll('.open-close-all');
@@ -78,10 +77,14 @@ function displayLabels(labels){
         div.addEventListener('click',()=>{
          showDetails(item.id);
         })
-        div.className='card  bg-base-100 card-sm shadow-lg';
+        if(item.status === 'open'){
+            div.className=`card border-top-green bg-base-100 card-sm shadow-lg`;
+        }else{
+            div.className=`card border-top-purple bg-base-100 card-sm shadow-lg`;
+        }
         
         div.innerHTML=`
-         <div class="card-body space-y-3">
+         <div class=" card-body space-y-3">
                     <div class="flex justify-between items-center">
                         <div id="openClosedIcon"><img src="./assets/Open-Status.png" alt=""></div>
                         <span id="status" class="py-2 px-4 bg-red-100 text-red-500 font-semibold rounded-xl text-center">${item.priority}</span>
@@ -127,7 +130,11 @@ function displayOpenIssue(){
          div.addEventListener('click',()=>{
          showDetails(item.id);
         })
-        div.className='card  bg-base-100 card-sm shadow-lg';
+        if(item.status === 'open'){
+            div.className=`card border-top-green bg-base-100 card-sm shadow-lg`;
+        }else{
+            div.className=`card border-top-purple bg-base-100 card-sm shadow-lg`;
+        }
         div.innerHTML=`
          <div class="card-body space-y-3">
                     <div class="flex justify-between items-center">
@@ -162,7 +169,11 @@ function displayClosedIssue(){
          div.addEventListener('click',()=>{
          showDetails(item.id);
         })
-        div.className='card  bg-base-100 card-sm shadow-lg';
+       if(item.status === 'open'){
+            div.className=`card border-top-green bg-base-100 card-sm shadow-lg`;
+        }else{
+            div.className=`card border-top-purple bg-base-100 card-sm shadow-lg`;
+        }
         div.innerHTML=`
          <div class="card-body space-y-3">
                     <div class="flex justify-between items-center">
@@ -197,7 +208,11 @@ function displayClosedIssue(){
          div.addEventListener('click',()=>{
          showDetails(item.id);
         })
-        div.className='card  bg-base-100 card-sm shadow-lg';
+       if(item.status === 'open'){
+            div.className=`card border-top-green bg-base-100 card-sm shadow-lg`;
+        }else{
+            div.className=`card border-top-purple bg-base-100 card-sm shadow-lg`;
+        }
         div.innerHTML=`
          <div class="card-body space-y-3">
                     <div class="flex justify-between items-center">
