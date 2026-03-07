@@ -18,7 +18,7 @@
 
 <body class="bg-[#F8FAFC] min-h-screen">
     <header>
-        <div class="navbar bg-base-100 shadow-sm">
+        <div class=" flex-col md:flex-row navbar bg-base-100 shadow-sm space-y-2">
             <div class="flex-1">
                 <a class="btn btn-ghost text-xl">
                     <img src="./assets/github-logo.png" alt="logo" class="w-9 h-9">
@@ -51,13 +51,13 @@
         <section class="mt-4">
             <div class="navbar bg-base-100 shadow-sm gap-4 flex justify-between">
                 <div class="flex items-center gap-4">
-                    <img src="./assets/Aperture.png" alt="" class="p-3 rounded-full bg-gray-100">
+                    <img src="./assets/Aperture.png" alt="" class="p-2 md:p-3 rounded-full bg-gray-100">
                     <div>
-                        <h2 class="font-semibold text-xl text-neutral"><span id="allIssue">50</span> Issues</h2>
-                        <p class="text-[#64748B]">Track and manage your project issues</p>
+                        <h2 class="font-semibold text-lg md:text-xl text-neutral"><span id="allIssue">50</span> Issues</h2>
+                        <p class="text-[#64748B] text-sm md:text-lg">Track and manage your project issues</p>
                     </div>
                 </div>
-                <div class="flex justify-between gap-2 items-center">
+                <div class="flex flex-col md:flex-row justify-between gap-2 items-center">
                     <div class="flex gap-2 items-center font-semibold"><i class="fa-solid fa-circle text-accent"></i>
                         Open</div>
                     <div class="flex gap-2 items-center font-semibold"><i
