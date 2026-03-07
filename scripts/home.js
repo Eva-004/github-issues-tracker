@@ -8,6 +8,7 @@ const allIssueContainer = document.getElementById('allIssueContainer');
 const openIssue = document.getElementById('open-btn');
 const closedBtn = document.getElementById('closed-btn');
 const openClosAllBtn = document.querySelectorAll('.open-close-all');
+const openClosedIcon = document.querySelectorAll('openClosedIcon');
 const searchBar = document.getElementById('search');
 const loadSpinner = document.getElementById('load-spinner');
 const modalContainer = document.getElementById('modalContainer');
@@ -19,6 +20,14 @@ const description = document.getElementById('description');
 const assignee = document.getElementById('assignee');
 const priority= document.getElementById('priority');
 const author= document.getElementById('author');
+
+function updateOpenClosedIcon(status){
+  if(status === 'open'){
+    return `<img src="./assets/Open-Status.png" alt="">`
+  }else{
+    return `<img src="./assets/closed.png" alt="">`
+  }
+}
 
 function loadingSpinner(status){
    if(status){
@@ -86,7 +95,9 @@ function displayLabels(labels){
         div.innerHTML=`
          <div class=" card-body space-y-3">
                     <div class="flex justify-between items-center">
-                        <div id="openClosedIcon"><img src="./assets/Open-Status.png" alt=""></div>
+                        <div class="openClosedIcon">
+                        ${updateOpenClosedIcon(item.status)}
+                        </div>
                         <span id="status" class="py-2 px-4 bg-red-100 text-red-500 font-semibold rounded-xl text-center">${item.priority}</span>
                     </div>
                     <h2 class="font-semibold">${item.title}</h2>
@@ -138,7 +149,7 @@ function displayOpenIssue(){
         div.innerHTML=`
          <div class="card-body space-y-3">
                     <div class="flex justify-between items-center">
-                        <div id="openClosedIcon"><img src="./assets/Open-Status.png" alt=""></div>
+                        <div class="openClosedIcon">${updateOpenClosedIcon(item.status)}</div>
                         <span id="status" class="py-2 px-4 bg-red-100 text-red-500 font-semibold rounded-xl text-center">${item.priority}</span>
                     </div>
                     <h2 class="font-semibold">${item.title}</h2>
@@ -177,7 +188,7 @@ function displayClosedIssue(){
         div.innerHTML=`
          <div class="card-body space-y-3">
                     <div class="flex justify-between items-center">
-                        <div id="openClosedIcon"><img src="./assets/Open-Status.png" alt=""></div>
+                        <div class="openClosedIcon">${updateOpenClosedIcon(item.status)}</div>
                         <span id="status" class="py-2 px-4 bg-red-100 text-red-500 font-semibold rounded-xl text-center">${item.priority}</span>
                     </div>
                     <h2 class="font-semibold">${item.title}</h2>
@@ -216,7 +227,7 @@ function displayClosedIssue(){
         div.innerHTML=`
          <div class="card-body space-y-3">
                     <div class="flex justify-between items-center">
-                        <div id="openClosedIcon"><img src="./assets/Open-Status.png" alt=""></div>
+                        <div class="openClosedIcon">${updateOpenClosedIcon(item.status)}</div>
                         <span id="status" class="py-2 px-4 bg-red-100 text-red-500 font-semibold rounded-xl text-center">${item.priority}</span>
                     </div>
                     <h2 class="font-semibold">${item.title}</h2>
