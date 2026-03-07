@@ -11,6 +11,15 @@ const closedBtn = document.getElementById('closed-btn');
 const openClosAllBtn = document.querySelectorAll('.open-close-all');
 const searchBar = document.getElementById('search');
 const loadSpinner = document.getElementById('load-spinner');
+const modalContainer = document.getElementById('modalContainer');
+const title = document.getElementById('title');
+const badge = document.getElementById('status');
+const labels = document.getElementById('labels');
+const date = document.getElementById('date');
+const description = document.getElementById('description');
+const assignee = document.getElementById('assignee');
+const priority= document.getElementById('priority');
+const author= document.getElementById('author');
 
 function loadingSpinner(status){
    if(status){
@@ -66,7 +75,11 @@ function displayLabels(labels){
     data.forEach(item=>{
         loadSingleIssue(item.id);
         const div = document.createElement('div');
+        div.addEventListener('click',()=>{
+         showDetails(item.id);
+        })
         div.className='card  bg-base-100 card-sm shadow-lg';
+        
         div.innerHTML=`
          <div class="card-body space-y-3">
                     <div class="flex justify-between items-center">
@@ -93,6 +106,7 @@ function displayLabels(labels){
 async function loadSingleIssue(id) {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
+
    if(data.data.status === 'open'){
      openIssues.push(data.data);
    }else if(data.data.status === 'closed'){
@@ -100,6 +114,7 @@ async function loadSingleIssue(id) {
    }else{
      allIssues.push(data.data);
    }
+   return data.data;
 }
 
 function displayOpenIssue(){
@@ -109,6 +124,9 @@ function displayOpenIssue(){
     allIssue.innerText=openIssues.length;
    openIssues.forEach(item=>{
         const div = document.createElement('div');
+         div.addEventListener('click',()=>{
+         showDetails(item.id);
+        })
         div.className='card  bg-base-100 card-sm shadow-lg';
         div.innerHTML=`
          <div class="card-body space-y-3">
@@ -141,6 +159,9 @@ function displayClosedIssue(){
     allIssue.innerText=closedIssues.length;
    closedIssues.forEach(item=>{
         const div = document.createElement('div');
+         div.addEventListener('click',()=>{
+         showDetails(item.id);
+        })
         div.className='card  bg-base-100 card-sm shadow-lg';
         div.innerHTML=`
          <div class="card-body space-y-3">
@@ -173,6 +194,9 @@ function displayClosedIssue(){
     allIssue.innerText=allIssues.length;
      allIssues.forEach(item=>{
         const div = document.createElement('div');
+         div.addEventListener('click',()=>{
+         showDetails(item.id);
+        })
         div.className='card  bg-base-100 card-sm shadow-lg';
         div.innerHTML=`
          <div class="card-body space-y-3">
@@ -216,6 +240,19 @@ function displayClosedIssue(){
     })
     allIssue.innerText=searchIssues.length;
    displayAllIssues(data.data);
+ }
+ async function showDetails(id){
+   const data =await loadSingleIssue(id);
+   const label = displayLabels(data.labels);
+   title.innerText=data.title;
+   badge.innerText=data.status;
+   author.innerText=data.assignee;
+   date.innerText=data.createdAt;
+   labels.innerHTML=label;
+   description.innerText=data.description
+   modalContainer.showModal();
+   assignee.innerText=data.assignee;
+   priority.innerText=data.priority;
  }
  loadAllIssues();
  
