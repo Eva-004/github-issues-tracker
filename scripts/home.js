@@ -121,11 +121,11 @@ async function loadSingleIssue(id) {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
 
-   if(data.data.status === 'open'){
+   if(data.data.status === 'open' && !openIssues.some(issue => issue.id === data.data.id)){
      openIssues.push(data.data);
-   }else if(data.data.status === 'closed'){
+   }else if(data.data.status === 'closed' && !closedIssues.some(issue => issue.id === data.data.id)){
      closedIssues.push(data.data);
-   }else{
+   }else if(!allIssues.some(issue => issue.id === data.data.id)){
      allIssues.push(data.data);
    }
    return data.data;
