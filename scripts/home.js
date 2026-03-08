@@ -274,7 +274,7 @@ function displayClosedIssue(){
    title.innerText=data.title;
    badge.innerText=data.status;
    author.innerText=data.author;
-   date.innerText=data.createdAt.split('T')[0];
+   date.innerText=`. ${data.createdAt.split('T')[0]}`;
    labels.innerHTML=label;
    description.innerText=data.description
    modalContainer.showModal();
