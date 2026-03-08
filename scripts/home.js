@@ -108,7 +108,7 @@ function displayLabels(labels){
                     <hr class="text-[#64748B80]">
                     <div class="space-y-1">
                         <p class="text-[#64748B]">#${item.id} by ${item.author}</p>
-                        <p class="text-[#64748B]">${item.createdAt}</p>
+                        <p class="text-[#64748B]">${item.createdAt.split('T')[0]}</p>
                     </div>
                 </div>
         ` 
@@ -160,7 +160,7 @@ function displayOpenIssue(){
                     <hr class="text-[#64748B80]">
                     <div class="space-y-1">
                         <p class="text-[#64748B]">#${item.id} by ${item.author}</p>
-                        <p class="text-[#64748B]">${item.createdAt}</p>
+                        <p class="text-[#64748B]">${item.createdAt.split('T')[0]}</p>
                     </div>
                 </div>
         ` 
@@ -199,7 +199,7 @@ function displayClosedIssue(){
                     <hr class="text-[#64748B80]">
                     <div class="space-y-1">
                         <p class="text-[#64748B]">#${item.id} by ${item.author}</p>
-                        <p class="text-[#64748B]">${item.createdAt}</p>
+                        <p class="text-[#64748B]">${item.createdAt.split('T')[0]}</p>
                     </div>
                 </div>
         ` 
@@ -238,7 +238,7 @@ function displayClosedIssue(){
                     <hr class="text-[#64748B80]">
                     <div class="space-y-1">
                         <p class="text-[#64748B]">#${item.id} by ${item.author}</p>
-                        <p class="text-[#64748B]">${item.createdAt}</p>
+                        <p class="text-[#64748B]">${item.createdAt.split('T')[0]}</p>
                     </div>
                 </div>
         ` 
@@ -258,7 +258,8 @@ function displayClosedIssue(){
  }
  async function loadSearchValue() {
     const searchText = searchBar.value;
-    searchBar.innerText='';
+    searchBar.value='';
+    searchIssues=[];
     const res=await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`);
     const data = await res.json();
     data.data.forEach(item=>{
@@ -272,8 +273,8 @@ function displayClosedIssue(){
    const label = displayLabels(data.labels);
    title.innerText=data.title;
    badge.innerText=data.status;
-   author.innerText=data.assignee;
-   date.innerText=data.createdAt;
+   author.innerText=data.author;
+   date.innerText=data.createdAt.split('T')[0];
    labels.innerHTML=label;
    description.innerText=data.description
    modalContainer.showModal();
